@@ -6,7 +6,7 @@ Get comfortable with using WebGL and its shaders to generate an interesting 3D, 
 
 ## Getting Started
 
-1. Fork and clone [this repository](https://github.com/CIS700-Procedural-Graphics/Project1-Noise).
+1. Fork and clone [this repository](https://github.com/CIS-5660-Fall-2024/hw01-fireball).
 
 2. Copy your hw0 code into your local hw1 repository.
 
@@ -69,5 +69,5 @@ Choose one of the following options:
 
 - Update README.md to contain a solid description of your project
 - Publish your project to gh-pages. `npm run deploy`. It should now be visible at http://username.github.io/repo-name
-- Create a [pull request](https://help.github.com/articles/creating-a-pull-request/) to this repository, and in the comment, include a link to your published project.
+- Create a [pull request](https://help.github.com/articles/creating-a-pull-request/) to this repository, and in the comment, include a link to your published project
 - Submit the link to your pull request on Canvas
