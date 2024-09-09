@@ -71,3 +71,7 @@ Choose one of the following options:
 - Publish your project to gh-pages. `npm run deploy`. It should now be visible at http://username.github.io/repo-name
 - Create a [pull request](https://help.github.com/articles/creating-a-pull-request/) to this repository, and in the comment, include a link to your published project
 - Submit the link to your pull request on Canvas
+
+## Reference
+- ShaderToy Fire: https://www.shadertoy.com/view/XsXSWS
+- Noise Funtion Implementation: https://github.com/ashima/webgl-noise/blob/master/src/noise3D.glsl

@@ -14,6 +14,7 @@ in vec4 fs_Col;
 
 out vec4 out_Col;
 
+
 float rand(vec3 p) {
     return fract(sin(dot(p, vec3(12.9898, 78.233, 54.53))) * 43758.5453);
 }
@@ -42,13 +43,13 @@ float fbm(vec3 p) {
 }
 
 void main() {
-    vec3 pos = fs_Pos.xyz * u_NoiseScale + u_Time;
+    vec3 pos = fs_Pos.xyz * u_NoiseScale * 2.0f + u_Time;
     float noiseValue = fbm(pos);
-
-    vec3 finalColor = mix(u_BaseColor.rgb, u_Color.rgb, noiseValue * noiseValue);
-
+    float distanceToOrigin = length(fs_Pos.xyz);
+    float normalizedDistance = distanceToOrigin - 1.0f;
+    float colorMixFactor = noiseValue + normalizedDistance * 2.0f;
+    vec3 finalColor = mix(u_Color.rgb, u_BaseColor.rgb, colorMixFactor);
     float diffuseTerm = max(dot(normalize(fs_Nor), normalize(fs_LightVec)), 0.0);
     float lightIntensity = diffuseTerm + u_AmbientTerm;  
-
     out_Col = vec4(finalColor * lightIntensity, u_Color.a);
 }

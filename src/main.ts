@@ -16,9 +16,9 @@ const controls = {
   tesselations: 5,
   noiseColor: [255, 0, 0],
   baseColor: [255, 153, 0],
-  noiseScaleX: 1.0,  
-  noiseScaleY: 1.0,
-  noiseScaleZ: 1.0,
+  ColorNoiseScaleX: 1.0,  
+  ColorNoiseScaleY: 1.0,
+  ColorNoiseScaleZ: 1.0,
   lightIntensity: 0.5,  
   'Load Scene': loadScene, 
 };
@@ -56,9 +56,9 @@ function main() {
   gui.add(controls, 'Load Scene');
   gui.addColor(controls, 'noiseColor');
   gui.addColor(controls, 'baseColor'); 
-  gui.add(controls, 'noiseScaleX', 0.1, 5.0).step(0.1); 
-  gui.add(controls, 'noiseScaleY', 0.1, 5.0).step(0.1);
-  gui.add(controls, 'noiseScaleZ', 0.1, 5.0).step(0.1);
+  gui.add(controls, 'ColorNoiseScaleX', 0.1, 5.0).step(0.1); 
+  gui.add(controls, 'ColorNoiseScaleY', 0.1, 5.0).step(0.1);
+  gui.add(controls, 'ColorNoiseScaleZ', 0.1, 5.0).step(0.1);
   gui.add(controls, 'lightIntensity', 0.0, 1.0).step(0.01);
 
   // get canvas and webgl context
@@ -113,9 +113,9 @@ function main() {
   ]);
 
     const noiseScale = new Float32Array([
-      controls.noiseScaleX,
-      controls.noiseScaleY,
-      controls.noiseScaleZ
+      controls.ColorNoiseScaleX,
+      controls.ColorNoiseScaleY,
+      controls.ColorNoiseScaleZ
   ]);
 
     lambert.setUniform1f('u_Time', time);
@@ -123,11 +123,8 @@ function main() {
     lambert.setUniform1f('u_AmbientTerm', controls.lightIntensity);
     lambert.setUniform4fv('u_BaseColor', baseColorVec); 
 
-
     renderer.render(camera, lambert, [
-      //icosphere,
-      cube,
-      //square,
+      icosphere
       ],
       colorVec
     );
