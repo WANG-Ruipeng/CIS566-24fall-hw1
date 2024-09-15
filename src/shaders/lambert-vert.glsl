@@ -14,7 +14,7 @@ out vec4 fs_LightVec;
 out vec4 fs_Col;
 out vec4 fs_Pos;
 
-const vec4 lightPos = vec4(5, 5, 3, 1);
+const vec4 lightPos = vec4(0, 0, 5, 1);
 
 // Simplex 3D Noise 
 // by Ian McEwan, Ashima Arts

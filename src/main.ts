@@ -23,12 +23,11 @@ const controls = {
   'Load Scene': loadScene, 
 };
 
-
-
 let icosphere: Icosphere;
 let square: Square;
 let cube: Cube;
 let prevTesselations: number = 5;
+let cameraPosition : vec3;
 let time = 0.0;
 
 function loadScene() {
@@ -36,7 +35,6 @@ function loadScene() {
   icosphere.create();
   square = new Square(vec3.fromValues(0, 0, 0));
   square.create();
-
   cube = new Cube(vec3.fromValues(0, 0, 0)); 
   cube.create();
 }
@@ -79,10 +77,17 @@ function main() {
   const renderer = new OpenGLRenderer(canvas);
   renderer.setClearColor(0.2, 0.2, 0.2, 1);
   gl.enable(gl.DEPTH_TEST);
+  gl.enable(gl.BLEND);
+  gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
 
   const lambert = new ShaderProgram([
     new Shader(gl.VERTEX_SHADER, require('./shaders/lambert-vert.glsl')),
     new Shader(gl.FRAGMENT_SHADER, require('./shaders/lambert-frag.glsl')),
+  ]);
+
+  const squareShader = new ShaderProgram([
+    new Shader(gl.VERTEX_SHADER, require('./shaders/square-vert.glsl')),
+    new Shader(gl.FRAGMENT_SHADER, require('./shaders/square-frag.glsl')),
   ]);
 
   // This function will be called every frame
@@ -122,12 +127,12 @@ function main() {
     lambert.setUniform3fv('u_NoiseScale', noiseScale);
     lambert.setUniform1f('u_AmbientTerm', controls.lightIntensity);
     lambert.setUniform4fv('u_BaseColor', baseColorVec); 
-
-    renderer.render(camera, lambert, [
-      icosphere
-      ],
-      colorVec
-    );
+    renderer.render(camera, lambert, [icosphere],colorVec);
+    
+    cameraPosition = new Float32Array([0,0,5]);
+    squareShader.setUniform3fv('u_CameraPosition', cameraPosition);
+    squareShader.setUniform1f('u_Time', time);
+    renderer.render(camera, squareShader, [square], colorVec);
     stats.end();
 
     // Tell the browser to call `tick` again whenever it renders a new frame
