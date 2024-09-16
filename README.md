@@ -1,9 +1,10 @@
 # [Project 1: Noise](https://github.com/CIS-566-Fall-2022/hw01-fireball-base)
 
-## Demo
-[Click here for live demo.](https://wang-ruipeng.github.io/CIS566-24fall-hw1/)
+## Quick GIF Preview
 ![gif demo](https://github.com/user-attachments/assets/bd94d78e-5194-455c-b1dc-fd33a439882f)
 
+## Demo
+[Click here for live demo.](https://wang-ruipeng.github.io/CIS566-24fall-hw1/)
 
 ## Description
 ### Fireball
