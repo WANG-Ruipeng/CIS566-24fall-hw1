@@ -1,5 +1,19 @@
 # [Project 1: Noise](https://github.com/CIS-566-Fall-2022/hw01-fireball-base)
 
+## Demo
+[Click here for live demo.](https://wang-ruipeng.github.io/CIS566-24fall-hw1/)
+![gif demo](https://github.com/user-attachments/assets/bd94d78e-5194-455c-b1dc-fd33a439882f)
+
+
+## Description
+### Fireball
+Utilizes 3D Perlin noise for dynamic texture generation, simplex 3D noise for vertex displacement, creating a swirling, molten appearance. Incorporates a color change according to the vertex displacement. Achieves a realistic, animated fire effect through noise-based color mixing and distortion.
+### Ring
+Employs a distance function to create a flickering, irregular ringsthat looks like a torus from certain angle. Uses smoothstep for soft edges and applies time-based animation for a pulsating effect. Results in a dynamic and somehow baffling (when you discover that this ring is a plane instead of a torus) ring surrounding the fireball.
+### Starry Background
+- Implements a 3D hash function for star distribution. Uses a custom star shape function with random plane selection for varied star orientations. Applies simple harmonic motion for twinkling.
+- Incorporates a meteor effect using ray-plane intersection and smoothstep for tail rendering. Achieves a deep, dynamic night sky with twinkling stars and occasional shooting stars
+
 ## Objective
 
 Get comfortable with using WebGL and its shaders to generate an interesting 3D, continuous surface using a multi-octave noise algorithm.
