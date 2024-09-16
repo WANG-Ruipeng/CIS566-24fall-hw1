@@ -7,44 +7,48 @@ class Cube extends Drawable {
   positions: Float32Array;
   normals: Float32Array;
   center: vec4;
+  size: number;
 
-  constructor(center: vec3) {
+  constructor(center: vec3, size: number = 1) {
     super();
     this.center = vec4.fromValues(center[0], center[1], center[2], 1);
+    this.size = size;
   }
 
   create() {
+    const s = this.size / 2; // Half of the size for each dimension
+
     this.positions = new Float32Array([
       // Front face
-      -1, -1,  1, 1,
-       1, -1,  1, 1,
-       1,  1,  1, 1,
-      -1,  1,  1, 1,
+      -s, -s,  s, 1,
+       s, -s,  s, 1,
+       s,  s,  s, 1,
+      -s,  s,  s, 1,
       // Back face
-      -1, -1, -1, 1,
-      -1,  1, -1, 1,
-       1,  1, -1, 1,
-       1, -1, -1, 1,
+      -s, -s, -s, 1,
+      -s,  s, -s, 1,
+       s,  s, -s, 1,
+       s, -s, -s, 1,
       // Top face
-      -1,  1, -1, 1,
-      -1,  1,  1, 1,
-       1,  1,  1, 1,
-       1,  1, -1, 1,
+      -s,  s, -s, 1,
+      -s,  s,  s, 1,
+       s,  s,  s, 1,
+       s,  s, -s, 1,
       // Bottom face
-      -1, -1, -1, 1,
-       1, -1, -1, 1,
-       1, -1,  1, 1,
-      -1, -1,  1, 1,
+      -s, -s, -s, 1,
+       s, -s, -s, 1,
+       s, -s,  s, 1,
+      -s, -s,  s, 1,
       // Right face
-       1, -1, -1, 1,
-       1,  1, -1, 1,
-       1,  1,  1, 1,
-       1, -1,  1, 1,
+       s, -s, -s, 1,
+       s,  s, -s, 1,
+       s,  s,  s, 1,
+       s, -s,  s, 1,
       // Left face
-      -1, -1, -1, 1,
-      -1, -1,  1, 1,
-      -1,  1,  1, 1,
-      -1,  1, -1, 1,
+      -s, -s, -s, 1,
+      -s, -s,  s, 1,
+      -s,  s,  s, 1,
+      -s,  s, -s, 1,
     ]);
 
     this.normals = new Float32Array([
@@ -104,7 +108,7 @@ class Cube extends Drawable {
     gl.bindBuffer(gl.ARRAY_BUFFER, this.bufPos);
     gl.bufferData(gl.ARRAY_BUFFER, this.positions, gl.STATIC_DRAW);
 
-    console.log(`Created cube`);
+    console.log(`Created cube with size ${this.size}`);
   }
 };
 

@@ -25,7 +25,7 @@ const controls = {
 
 let icosphere: Icosphere;
 let square: Square;
-let cube: Cube;
+let skybox: Cube;
 let prevTesselations: number = 5;
 let cameraPosition : vec3;
 let time = 0.0;
@@ -35,8 +35,8 @@ function loadScene() {
   icosphere.create();
   square = new Square(vec3.fromValues(0, 0, 0));
   square.create();
-  cube = new Cube(vec3.fromValues(0, 0, 0)); 
-  cube.create();
+  skybox = new Cube(vec3.fromValues(0, 0, 0), 1000); 
+  skybox.create();
 }
 
 function main() {
@@ -90,6 +90,11 @@ function main() {
     new Shader(gl.FRAGMENT_SHADER, require('./shaders/square-frag.glsl')),
   ]);
 
+  const skyboxShader = new ShaderProgram([
+    new Shader(gl.VERTEX_SHADER, require('./shaders/skybox-vert.glsl')),
+    new Shader(gl.FRAGMENT_SHADER, require('./shaders/skybox-frag.glsl')),
+  ]);
+
   // This function will be called every frame
   function tick() {
     time += 0.01;
@@ -123,6 +128,11 @@ function main() {
       controls.ColorNoiseScaleZ
   ]);
 
+    gl.depthMask(false); 
+    skyboxShader.setUniform1f('u_Time', time);
+    renderer.render(camera, skyboxShader, [skybox],new Float32Array([0,0,0]));
+    gl.depthMask(true); 
+
     lambert.setUniform1f('u_Time', time);
     lambert.setUniform3fv('u_NoiseScale', noiseScale);
     lambert.setUniform1f('u_AmbientTerm', controls.lightIntensity);
@@ -132,7 +142,7 @@ function main() {
     cameraPosition = new Float32Array([0,0,5]);
     squareShader.setUniform3fv('u_CameraPosition', cameraPosition);
     squareShader.setUniform1f('u_Time', time);
-    renderer.render(camera, squareShader, [square], colorVec);
+    renderer.render(camera, squareShader, [square], new Float32Array([0,0,0]));
     stats.end();
 
     // Tell the browser to call `tick` again whenever it renders a new frame
